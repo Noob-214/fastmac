@@ -5,9 +5,12 @@ defaults:
   run:
     shell: bash
 
+runs:
+  using: 'docker'
+  image: alpine
+
 jobs:
   build:
-    runs-on: ubuntu-20.04
     steps:
     - uses: fastai/workflows/ssh@master
       with:
