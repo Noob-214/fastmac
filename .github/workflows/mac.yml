@@ -7,13 +7,13 @@ defaults:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-11.0
     steps:
     - uses: fastai/workflows/ssh@master
       with:
         ssh_key: ${{ secrets.SSH_KEY }}
         key_file: id_ecdsa
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
     - run: source script-mac.sh
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v2
+      uses: mxschmitt/action-tmate@master
