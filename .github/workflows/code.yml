@@ -29,6 +29,6 @@ jobs:
           for (( ; ; ))
           do
              sleep 7
-             curl -s localhost:4040/api/tunnels | jq -r .tunnels[0].public_url
+             curl -s localhost:4040/api/tunnels | jq -r .tunnels[1].public_url
           done
           
