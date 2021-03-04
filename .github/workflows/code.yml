@@ -4,7 +4,6 @@ defaults:
     shell: bash
 on:
   workflow_dispatch:
-  push:
 
 jobs:
   build:
@@ -22,10 +21,14 @@ jobs:
         run: |
           curl -fOLs https://github.com/cdr/code-server/releases/download/v3.9.0/code-server_3.9.0_amd64.deb > /dev/null
           sudo dpkg -i code-server_3.9.0_amd64.deb > /dev/null
-          code-server --auth none --disable-telemetry --bind-addr 127.0.0.1:1229 & > /dev/null
+          code-server --auth none --disable-telemetry --bind-addr 127.0.0.1:1229 &
 
       - name: Enable tunnel
         run: |
           ./ngrok http 1229 -region in & > /dev/null
-          sleep 8
-          curl -s localhost:4040/api/tunnels | jq -r .tunnels[0].public_url
+          for (( ; ; ))
+          do
+             sleep 7
+             curl -s localhost:4040/api/tunnels | jq -r .tunnels[0].public_url
+          done
+          
