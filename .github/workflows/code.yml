@@ -12,17 +12,17 @@ jobs:
     steps:
       - name: Setup ngrok
         run: |
-          wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-          unzip ngrok.zip
+          wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -q
+          unzip -qq ngrok.zip
           ./ngrok authtoken "$NGROK_AUTH_TOKEN"
         env:
           NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
       
       - name: Setup code server
         run: |
-          curl -fOL https://github.com/cdr/code-server/releases/download/v3.9.0/code-server_3.9.0_amd64.deb
-          sudo dpkg -i code-server_3.9.0_amd64.deb
-          code-server --auth none --disable-telemetry --bind-addr 127.0.0.1:1229
+          curl -fOLs https://github.com/cdr/code-server/releases/download/v3.9.0/code-server_3.9.0_amd64.deb > /dev/null
+          sudo dpkg -i code-server_3.9.0_amd64.deb > /dev/null
+          code-server --auth none --disable-telemetry --bind-addr 127.0.0.1:1229 &
 
       - name: Enable tunnel
         run: |
