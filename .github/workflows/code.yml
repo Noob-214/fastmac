@@ -26,6 +26,8 @@ jobs:
       - name: Enable tunnel
         run: |
           ./ngrok http 1229 -region in & > /dev/null
+          echo " "
+          echo " "
           for (( ; ; ))
           do
              sleep 7
